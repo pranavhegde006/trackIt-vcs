@@ -3,16 +3,26 @@ import java.security.*;
 
 public class App {
 	public static void main(String[] args) {
-		File file = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/a.txt");
-		String hashval = new String();
+//		File file = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/a.txt");
+		File folder = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/");
+		File[] listOfFiles = folder.listFiles();
+
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        String fileName = file.getName();
+		        String hashval = new String();
+				String fileID = new String();
+				
+				try {
+					hashval = getHash(file);
+				}
+				catch(Exception e) {
+					System.out.println(e);
+				}
+//				System.out.println("The file name is: " + fileName + " and the hash value of the file is " + hashval);
+		    }
+		}
 		
-		try {
-			hashval = getHash(file);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		System.out.println(hashval);
 	}
 	
 	private static String getHash(File file) throws IOException{
