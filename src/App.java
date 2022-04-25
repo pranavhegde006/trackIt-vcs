@@ -1,58 +1,57 @@
 import java.io.*;
-import java.security.*;
 
 public class App {
-	public static void main(String[] args) {
-//		File file = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/a.txt");
-		File folder = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/");
-		File[] listOfFiles = folder.listFiles();
+	public static void main(String[] args) throws Exception {
+		
+		File folder = new File("/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/test");		
+		String folderPath = "/home/pranavhegde006/Documents/PES/PES Sem 6/CS353 OOAD/Mini-Project/src/test/";		
+		String filePath = "src/test/b.txt";
+        File file = new File(filePath);
+        String path = file.getPath();
+        String absPath = file.getAbsolutePath();
+		
+		
+		String owner = GetInfo.getFileOwnerName(absPath);
+		
+//		File file = new File(path);
+		String hash = GetInfo.getHash(file);
+		
+		String res = GetInfo.getRepoHash(folder);
+		
+		String latestHash = Database.getLatestHash();
+		
+		boolean stat = Status.getStatus(folder);
+		
+		int fc = Database.getFileCount(1);
+		
+		
+		int fileCount = folder.list().length, k = 0;
+		MyFile[] files = new MyFile[fileCount];
+		
+		for (final File fileEntry : folder.listFiles()) {
+			files[k++] = new MyFile(fileEntry.getName(), fileEntry.getAbsolutePath(), 1);
+	    }
 
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		        String fileName = file.getName();
-		        String hashval = new String();
-				String fileID = new String();
-				
-				try {
-					hashval = getHash(file);
-				}
-				catch(Exception e) {
-					System.out.println(e);
-				}
-//				System.out.println("The file name is: " + fileName + " and the hash value of the file is " + hashval);
-		    }
-		}
 		
+//		Revert.revert("f6da9b9a8579da1071f37434aacebab0");
+		
+		Add.addFile(files);
+		Commit.commit(folder);
+		Push.push(folder);
+//		
+		System.out.println();
+		
+		View.getRemote();
+		System.out.println();
+		View.getCommits();
+		System.out.println();
+		View.getFiles();
+		System.out.println();
+		View.getRepo();
+		System.out.println();
+		
+
 	}
 	
-	private static String getHash(File file) throws IOException{
-		
-		String shaChecksum = new String();
-		try {
-			MessageDigest shaDigest = MessageDigest.getInstance("MD5");
-			shaChecksum = calculateChecksum(shaDigest, file);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		return shaChecksum;
-	}
 	
-	private static String calculateChecksum(MessageDigest digest, File file) throws IOException{
-		FileInputStream fis = new FileInputStream(file);
-		byte[] byteArray = new byte[1024];
-		int bytesCount = 0; 
-	    
-		while ((bytesCount = fis.read(byteArray)) != -1) {
-			digest.update(byteArray, 0, bytesCount);
-		};
-	   
-		fis.close();
-		byte[] bytes = digest.digest();
-		StringBuilder sb = new StringBuilder();
-		for(int i=0; i< bytes.length ;i++){
-			sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-		}
-		return sb.toString();
-	}
 }
