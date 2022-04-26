@@ -10,12 +10,14 @@ public class Revert {
 	public static void revert(String hashval) throws Exception {
 		String remoteLink = getRemoteLink(hashval);
 		clearCurrentDirectory();
-		createRepo();
+		createRepo(); 
 		
 		File folder = new File(remoteLink);
 		for(File file : folder.listFiles()) {
 			Push.copyDir(file.getPath(), "src/test");
 		}
+		
+		System.out.println("Repo reverted to the specified commit successfully!");
 	}
 	
 	

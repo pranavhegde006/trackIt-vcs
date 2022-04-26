@@ -24,6 +24,8 @@ public class Add {
 			catch(Exception e) {
 				return ;
 			}
+			
+			System.out.println("Files added successfully!");
 		}
 		
 		int dbFileCount = 0, currentFileCount = files.length;

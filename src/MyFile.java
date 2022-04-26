@@ -7,7 +7,7 @@ public class MyFile {
 	String hash;
 	String link;
 	String owner;
-	int repoid;
+	int repoid; 
 	String permissions;
 	
 	MyFile(String fileName, String link, int repoid) throws IOException{

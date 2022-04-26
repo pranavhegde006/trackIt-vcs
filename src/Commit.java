@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Commit {
+public class Commit { 
 	public static void commit(File folder) throws Exception {
 		boolean status = Status.getStatus(folder);
 		if(status == false) {

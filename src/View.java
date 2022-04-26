@@ -107,7 +107,7 @@ public class View {
 		
 		catch(Exception e) {
 				throw e;
-		}
+		} 
 		
 
 	}

@@ -6,11 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class Push {
-	
+	 
 	public static void push(File folder) throws Exception{
 		
 		
-		boolean status = Status.getRemoteStatus();
+		boolean status = getRemoteStatus();
 		if(status == false) {
 			int remoteNumber = Database.getRemoteNumber() + 1;
 			String dirname = "src/remote/r" + remoteNumber;
@@ -33,6 +33,15 @@ public class Push {
 	
 		
 	}
+	
+	
+	public static boolean getRemoteStatus() throws Exception {
+		int remoteNumber = Database.getRemoteNumber();
+		int commitID = Database.getCommitID();
+		
+		return remoteNumber == commitID;
+	}
+	
 	
 	public static void createDir(String dirname) throws IOException, InterruptedException {
 		Runtime r = Runtime.getRuntime();

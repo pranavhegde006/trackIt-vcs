@@ -87,7 +87,7 @@ public class Database {
 		catch(Exception e) {
 				return "NULL";
 		}
-		
+		 
 		if(rows == 0) {
 			System.out.println("Query results empty!");
 			return "NULL";

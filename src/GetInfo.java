@@ -11,7 +11,7 @@ import java.nio.file.attribute.UserPrincipal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class GetInfo {
+public class GetInfo { 
 	
 	public static String getFileOwnerName(String path) throws IOException{
 		Path myPath = Paths.get("");
