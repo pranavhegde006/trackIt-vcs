@@ -26,10 +26,13 @@ public class App {
 			return;
 		}
 		
-		if(!Login.username.equals(GetInfo.getFileOwnerName(files[0].link))) {
-			System.out.println("User not authorized to make changes!");
-			return;
+		for(int i = 0; i < files.length; i++) {
+			if(!Login.username.equals(GetInfo.getFileOwnerName(files[i].link))) {
+				System.out.println("User not authorized to make changes!");
+				return;
+			}
 		}
+		
 			
 		if(args.length == 1) {	
 			switch(args[0]) {
@@ -45,7 +48,7 @@ public class App {
 			  		break;
 			  	
 			  	default:
-			  		System.out.println("BYE");
+			  		System.out.println("Exiting from TrackIt!");
 			  		return ;
 			}
 		}
@@ -76,7 +79,7 @@ public class App {
 				  		View.getCommits();
 				  		System.out.println("\n");
 				  	default:
-				  		System.out.println("Didn't receive a valid output!");
+				  		System.out.println("Exiting from TrackIt!");
 				  		return;
 				}
 			}

@@ -25,7 +25,6 @@ public class Add {
 				return ;
 			}
 			
-			System.out.println("Files added successfully!");
 		}
 		
 		int dbFileCount = 0, currentFileCount = files.length;
@@ -62,6 +61,8 @@ public class Add {
 				throw e;
 			}
 		}
+		
+		System.out.println("Files added successfully!");
 		
 	}
 	
